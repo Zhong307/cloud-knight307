@@ -660,9 +660,6 @@
       #magic-owl-letter .mol-route-intro { inset: 72px 0 26px; }
       #magic-owl-letter .mol-route-scene { width: 315px; height: 542px; max-width: 100%; max-height: calc(100svh - 98px); }
     }
-    @media (prefers-reduced-motion: reduce) {
-      #magic-owl-letter *, #magic-owl-letter *::before, #magic-owl-letter *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
-    }
   </style>
 
   <section class="mol-stage" aria-label="雪鸮信使送来一封魔法信的动态页面预览">
@@ -1052,7 +1049,6 @@
         stage.classList.add('is-route');
         setStatus('正在写下寄送的路线');
         playCanon();
-        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         routeTimer = window.setTimeout(() => {
           stage.classList.remove('is-route');
           void stage.offsetWidth;
@@ -1063,8 +1059,8 @@
             stage.classList.add('is-ready');
             setStatus('点击火漆封印拆信');
             seal.focus({ preventScroll: true });
-          }, reducedMotion ? 50 : (liteMode ? 2900 : 4150));
-        }, reducedMotion ? 50 : (liteMode ? 2450 : 4550));
+          }, liteMode ? 2900 : 4150);
+        }, liteMode ? 2450 : 4550);
         watchdogTimer = window.setTimeout(() => {
           if (!stage.classList.contains('is-ready') && !stage.classList.contains('is-open')) {
             stage.classList.remove('is-route', 'is-playing');
